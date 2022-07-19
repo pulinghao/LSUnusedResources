@@ -50,6 +50,11 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 @property (strong, nonatomic) NSDate *startTime;
 @property (assign, nonatomic) BOOL isSortDescByFileSize;
 
+@property (weak) IBOutlet NSButton *WalkCheckBtn;
+@property (weak) IBOutlet NSButton *CycleCheckBtn;
+@property (weak) IBOutlet NSButton *BusCheckBtn;
+
+
 @end
 
 @implementation MainViewController
