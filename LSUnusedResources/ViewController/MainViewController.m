@@ -164,7 +164,10 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
         NSString *projectPath = [self.pathTextField stringValue];
         [outputResults appendFormat:@"Unused Resources In Project: \n%@\n\n", projectPath];
         
+        [outputResults appendString:[NSString stringWithFormat:@"name\tsize(Byte)\tpath\n"]];
         for (ResourceFileInfo *info in self.unusedResults) {
+            [outputResults appendFormat:@"%@\t", info.name];
+            [outputResults appendFormat:@"%llu\t", info.fileSize];
             [outputResults appendFormat:@"%@\n", info.path];
         }
         
@@ -244,7 +247,7 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 }
 - (IBAction)onBusSearchButtonClicked:(id)sender {
     NSButton *btn = (NSButton *)sender;
-    NSArray *walkArray = @[@"bus"];
+    NSArray *walkArray = @[@"bus",@"mcat"];
     if (btn.state) {
         [self.searchTypes addObjectsFromArray:walkArray];
     } else {

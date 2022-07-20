@@ -295,6 +295,12 @@ static NSString * const kPatternIdentifyGroupIndex  = @"PatternGroupIndex";
                     res = [res lastPathComponent];
                     res = [StringUtils stringByRemoveResourceSuffix:res];
                     [set addObject:res];
+                    
+                    // 考虑图片的暗黑模式
+//                    if([str containsString:@"BMThemeImage"]){
+                    NSString *darkStr = [NSString stringWithFormat:@"%@_dark",res];
+                    [set addObject:darkStr];
+//                    }
                 }
             }
         }

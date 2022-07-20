@@ -180,14 +180,17 @@ static NSString * const kSuffixPng         = @".png";
     // Search for all files
     NSMutableArray *argvals = [NSMutableArray array];
     [argvals addObject:directoryPath];
-    [argvals addObject:@"-name"];
-    [argvals addObject:[NSString stringWithFormat:@"*.%@", filetype]];
     
     for (NSString *folder in excludeFolders) {
-        [argvals addObject:@"!"];
-        [argvals addObject:@"-path"];
-        [argvals addObject:[NSString stringWithFormat:@"*/%@/*", folder]];
+        if (folder.length > 0) {
+            [argvals addObject:@"!"];
+            [argvals addObject:@"-path"];
+            [argvals addObject:[NSString stringWithFormat:@"%@/*", folder]];
+        }
     }
+    
+    [argvals addObject:@"-name"];
+    [argvals addObject:[NSString stringWithFormat:@"*.%@", filetype]];
     
     [task setArguments: argvals];
     

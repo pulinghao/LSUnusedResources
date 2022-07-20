@@ -18,6 +18,7 @@
 		B16638261F1865CC0046CFC4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B16638251F1865CC0046CFC4 /* Images.xcassets */; };
 		B19D81801B9451320097E947 /* ResourceFileSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B19D817F1B9451320097E947 /* ResourceFileSearcher.m */; };
 		B19D81831B9451550097E947 /* ResourceStringSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B19D81821B9451540097E947 /* ResourceStringSearcher.m */; };
+		B682A9F028880E5C00F90124 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B682A9EE28880E5C00F90124 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		B19D817F1B9451320097E947 /* ResourceFileSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceFileSearcher.m; sourceTree = "<group>"; };
 		B19D81811B9451540097E947 /* ResourceStringSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceStringSearcher.h; sourceTree = "<group>"; };
 		B19D81821B9451540097E947 /* ResourceStringSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceStringSearcher.m; sourceTree = "<group>"; };
+		B682A9EE28880E5C00F90124 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		B682A9EF28880E5C00F90124 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 		B120ACA21F15D01F00930A95 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				B682A9EF28880E5C00F90124 /* GDataXMLNode.h */,
+				B682A9EE28880E5C00F90124 /* GDataXMLNode.m */,
 				B120ACA31F15D01F00930A95 /* FileUtils.h */,
 				B120ACA41F15D01F00930A95 /* FileUtils.m */,
 				B120ACA51F15D01F00930A95 /* StringUtils.h */,
@@ -230,6 +235,7 @@
 				TargetAttributes = {
 					B1313CA41B942827001CD7CF = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 8E2J3QZ8ZD;
 					};
 					B1313CBA1B942827001CD7CF = {
 						CreatedOnToolsVersion = 6.4;
@@ -242,6 +248,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -285,6 +292,7 @@
 				B1313CAC1B942827001CD7CF /* AppDelegate.m in Sources */,
 				B120ACA91F15D01F00930A95 /* FileUtils.m in Sources */,
 				B19D81801B9451320097E947 /* ResourceFileSearcher.m in Sources */,
+				B682A9F028880E5C00F90124 /* GDataXMLNode.m in Sources */,
 				B19D81831B9451550097E947 /* ResourceStringSearcher.m in Sources */,
 				B120ACB11F16504A00930A95 /* ResourceSettings.m in Sources */,
 				B1313CD51B943075001CD7CF /* MainViewController.m in Sources */,
@@ -406,9 +414,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8E2J3QZ8ZD;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = LSUnusedResources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lessfun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -419,9 +430,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8E2J3QZ8ZD;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = LSUnusedResources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lessfun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
