@@ -44,7 +44,7 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 @property (weak) IBOutlet NSButton *exportButton;
 @property (weak) IBOutlet NSButton *deleteButton;
 
-@property (strong, nonatomic) NSMutableArray *unusedResults;
+@property (strong, nonatomic) NSMutableArray<ResourceFileInfo *> *unusedResults;
 @property (assign, nonatomic) BOOL isFileDone;
 @property (assign, nonatomic) BOOL isStringDone;
 @property (strong, nonatomic) NSDate *startTime;
@@ -53,6 +53,8 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 @property (weak) IBOutlet NSButton *WalkCheckBtn;
 @property (weak) IBOutlet NSButton *CycleCheckBtn;
 @property (weak) IBOutlet NSButton *BusCheckBtn;
+
+@property (nonatomic, strong) NSMutableArray<NSString *> *searchTypes;
 
 
 @end
@@ -81,6 +83,8 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResourceFileQueryDone:) name:kNotificationResourceFileQueryDone object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResourceStringQueryDone:) name:kNotificationResourceStringQueryDone object:nil];
+    
+    self.searchTypes = [[NSMutableArray alloc] init];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -216,6 +220,36 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 - (IBAction)onAddPatternButtonClicked:(id)sender {
     [[ResourceSettings sharedObject] addResourcePattern:[[ResourceStringSearcher sharedObject] createEmptyResourcePattern]];
     [self.patternTableView reloadData];
+}
+
+- (IBAction)onWalkSearchButtonClicked:(id)sender {
+    NSButton *btn = (NSButton *)sender;
+    NSArray *walkArray = @[@"foot",@"walk",@"bw",@"ar",@"vps",@"indoor",@"npc"];
+    if (btn.state) {
+        [self.searchTypes addObjectsFromArray:walkArray];
+    } else {
+        [self.searchTypes removeObjectsInArray:walkArray];
+    }
+
+    
+}
+- (IBAction)onCycleSearchButtonClicked:(id)sender {
+    NSButton *btn = (NSButton *)sender;
+    NSArray *walkArray = @[@"bike",@"cycle",@"bc"];
+    if (btn.state) {
+        [self.searchTypes addObjectsFromArray:walkArray];
+    } else {
+        [self.searchTypes removeObjectsInArray:walkArray];
+    }
+}
+- (IBAction)onBusSearchButtonClicked:(id)sender {
+    NSButton *btn = (NSButton *)sender;
+    NSArray *walkArray = @[@"bus"];
+    if (btn.state) {
+        [self.searchTypes addObjectsFromArray:walkArray];
+    } else {
+        [self.searchTypes removeObjectsInArray:walkArray];
+    }
 }
 
 - (void)onResultsTableViewSingleClicked {
@@ -425,10 +459,32 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
             }
         }
         
+        NSMutableArray *array = @[].mutableCopy;
+        for (ResourceFileInfo *info in self.unusedResults){
+            if ([self checkFileNameTypes:info]) {
+                [array addObject:info];
+            }
+        }
+        
+        self.unusedResults = [array mutableCopy];
+        
         [self.resultsTableView reloadData];
         
         [self setUIEnabled:YES];
     }
+}
+
+- (BOOL)checkFileNameTypes:(ResourceFileInfo *)resInfo{
+    NSString *name = resInfo.name;
+    if (self.searchTypes.count == 0) {
+        return YES;
+    }
+    for (NSString *typeName in self.searchTypes) {
+        if ([name containsString:typeName]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (BOOL)usingResWithDiffrentDirName:(ResourceFileInfo *)resInfo {

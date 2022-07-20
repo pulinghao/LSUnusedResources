@@ -917,26 +917,35 @@ will be considered to be used )</string>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C78-YS-YuQ">
                                         <rect key="frame" x="112" y="274" width="56" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="Walk" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gZ6-ha-Wow">
+                                        <buttonCell key="cell" type="check" title="Walk" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gZ6-ha-Wow">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="onWalkSearchButtonClicked:" target="XfG-lQ-9wD" id="W2m-0t-yTw"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OPG-dF-0LF">
                                         <rect key="frame" x="208" y="274" width="60" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="Cycle" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2zW-2P-QHd">
+                                        <buttonCell key="cell" type="check" title="Cycle" bezelStyle="regularSquare" imagePosition="left" inset="2" id="2zW-2P-QHd">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="onCycleSearchButtonClicked:" target="XfG-lQ-9wD" id="kzL-gR-cAT"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kuk-Mj-Qux">
                                         <rect key="frame" x="299" y="274" width="49" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="Bus" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="in7-ef-JcK">
+                                        <buttonCell key="cell" type="check" title="Bus" bezelStyle="regularSquare" imagePosition="left" inset="2" id="in7-ef-JcK">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="onBusSearchButtonClicked:" target="XfG-lQ-9wD" id="CoN-lA-CXb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </customView>
