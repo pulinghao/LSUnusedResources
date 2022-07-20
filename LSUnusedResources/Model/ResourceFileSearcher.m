@@ -147,8 +147,8 @@ static NSString * const kSuffixPng         = @".png";
         if (pathList.count) {
             for (NSString *path in pathList) {
                 // ignore if the resource file is in xxx/xxx.imageset/; xx/LaunchImage.launchimage; xx/AppIcon.appiconset; xx.bundle/xx
-                if (![self isInImageSetFolder:path]
-                    && [path rangeOfString:kSuffixBundle].location == NSNotFound) {
+                // 忽略 imageset中的图片文件,例如 npc.imageset/tian.png，会忽略掉tian.png文件
+                if (![self isInImageSetFolder:path] && [path rangeOfString:kSuffixBundle].location == NSNotFound) {
                     [resources addObject:path];
                 }
             }

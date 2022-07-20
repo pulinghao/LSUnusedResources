@@ -241,9 +241,9 @@ static NSString * const kPatternIdentifyGroupIndex  = @"PatternGroupIndex";
     if (!content) {
         return;
     }
-
+    
     if (resourcePattern.regex.length && resourcePattern.groupIndex >= 0) {
-        NSSet *set = [self getMatchStringWithContent:content pattern:resourcePattern.regex groupIndex:resourcePattern.groupIndex];
+        NSSet *set = [self getMatchStringWithContent2:content pattern:resourcePattern.regex groupIndex:resourcePattern.groupIndex];
         [self.resStringSet unionSet:set];
     }
 }
@@ -265,6 +265,43 @@ static NSString * const kPatternIdentifyGroupIndex  = @"PatternGroupIndex";
         return set;
     }
     
+    return nil;
+}
+
+- (NSSet *)getMatchStringWithContent2:(NSString *)content pattern:(NSString*)pattern groupIndex:(NSInteger)index {
+    NSRegularExpression *regexExpression = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSArray *contentArray = [content componentsSeparatedByString:@"\n"];
+    
+    NSMutableSet *set = [NSMutableSet set];
+    for (NSString *line in contentArray) {
+        // 去除收尾的空格
+        NSString *str = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        if (str.length == 0) {
+            continue;
+        }
+        
+        // 跳过对注释中的文件收录
+        if (str.length > 0 && [str hasPrefix:@"//"]) {
+            continue;
+        }
+        
+        NSArray* matchs = [regexExpression matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+        if (matchs.count > 0) {
+            for (NSTextCheckingResult *checkingResult in matchs) {
+                NSString *res = [str substringWithRange:[checkingResult rangeAtIndex:index]];
+                if (res.length) {
+                    res = [res lastPathComponent];
+                    res = [StringUtils stringByRemoveResourceSuffix:res];
+                    [set addObject:res];
+                }
+            }
+        }
+    }
+    if (set.count > 0) {
+        return set;
+    }
     return nil;
 }
 

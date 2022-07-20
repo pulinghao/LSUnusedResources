@@ -13,7 +13,7 @@
 #import "ResourceSettings.h"
 
 // Constant strings
-static NSString * const kDefaultResourceSuffixs    = @"imageset|jpg|gif|png";
+static NSString * const kDefaultResourceSuffixs    = @"imageset|jpg|gif|png|jpeg";
 static NSString * const kDefaultResourceSeparator  = @"|";
 
 static NSString * const kResultIdentifyFileIcon    = @"FileIcon";
