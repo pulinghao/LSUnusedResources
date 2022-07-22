@@ -238,7 +238,7 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 }
 - (IBAction)onCycleSearchButtonClicked:(id)sender {
     NSButton *btn = (NSButton *)sender;
-    NSArray *walkArray = @[@"bike",@"cycle",@"bc"];
+    NSArray *walkArray = @[@"bike",@"cycle",@"bc",@"roadbook"];
     if (btn.state) {
         [self.searchTypes addObjectsFromArray:walkArray];
     } else {
@@ -247,11 +247,11 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 }
 - (IBAction)onBusSearchButtonClicked:(id)sender {
     NSButton *btn = (NSButton *)sender;
-    NSArray *walkArray = @[@"bus",@"mcat"];
+    NSArray *busArray = @[@"bus",@"mcat",@"plane",@"coach",@"train"];
     if (btn.state) {
-        [self.searchTypes addObjectsFromArray:walkArray];
+        [self.searchTypes addObjectsFromArray:busArray];
     } else {
-        [self.searchTypes removeObjectsInArray:walkArray];
+        [self.searchTypes removeObjectsInArray:busArray];
     }
 }
 
