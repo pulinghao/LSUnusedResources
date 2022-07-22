@@ -914,39 +914,18 @@ will be considered to be used )</string>
                                             <action selector="onRemovePatternButtonClicked:" target="XfG-lQ-9wD" id="jUs-Jk-Syt"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C78-YS-YuQ">
-                                        <rect key="frame" x="112" y="274" width="56" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="Walk" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gZ6-ha-Wow">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-gC-At4" userLabel="Text Field - Resource Suffix">
+                                        <rect key="frame" x="113" y="274" width="536" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Type Filter, separates with '|' (eg nameA|nameB)" drawsBackground="YES" id="RPZ-My-Ygg">
                                             <font key="font" metaFont="system"/>
-                                        </buttonCell>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
                                         <connections>
-                                            <action selector="onWalkSearchButtonClicked:" target="XfG-lQ-9wD" id="W2m-0t-yTw"/>
+                                            <outlet property="delegate" destination="XfG-lQ-9wD" id="NkW-nE-fWs"/>
                                         </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OPG-dF-0LF">
-                                        <rect key="frame" x="208" y="274" width="60" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="Cycle" bezelStyle="regularSquare" imagePosition="left" inset="2" id="2zW-2P-QHd">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="onCycleSearchButtonClicked:" target="XfG-lQ-9wD" id="kzL-gR-cAT"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kuk-Mj-Qux">
-                                        <rect key="frame" x="299" y="274" width="49" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="Bus" bezelStyle="regularSquare" imagePosition="left" inset="2" id="in7-ef-JcK">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="onBusSearchButtonClicked:" target="XfG-lQ-9wD" id="CoN-lA-CXb"/>
-                                        </connections>
-                                    </button>
+                                    </textField>
                                 </subviews>
                             </customView>
                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wl2-aR-GsO">
@@ -1090,9 +1069,6 @@ will be considered to be used )</string>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="BusCheckBtn" destination="Kuk-Mj-Qux" id="oCA-YC-gQZ"/>
-                        <outlet property="CycleCheckBtn" destination="OPG-dF-0LF" id="gaT-8A-aAJ"/>
-                        <outlet property="WalkCheckBtn" destination="C78-YS-YuQ" id="dub-yj-uyZ"/>
                         <outlet property="browseButton" destination="K2U-Ys-vXw" id="5a0-Am-ufC"/>
                         <outlet property="deleteButton" destination="q84-1O-TmH" id="T95-Ys-7AA"/>
                         <outlet property="excludeFolderTextField" destination="HKw-L5-x7D" id="0DT-RI-gtg"/>
@@ -1105,6 +1081,7 @@ will be considered to be used )</string>
                         <outlet property="resultsTableView" destination="Yqh-sW-D2a" id="BS7-d1-Rhr"/>
                         <outlet property="searchButton" destination="d2Z-MZ-XC6" id="5dS-yE-IQm"/>
                         <outlet property="statusLabel" destination="T1v-qi-uUW" id="VL5-uP-7fx"/>
+                        <outlet property="typeTextField" destination="TXr-gC-At4" id="apx-p2-xrj"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

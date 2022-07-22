@@ -13,6 +13,8 @@ static NSString * const kSettingsKeyExcludeFolders   = @"ExcludeFolders";
 static NSString * const kSettingsKeyResourceSuffixs  = @"ResourceSuffixs";
 static NSString * const kSettingsKeyResourcePatterns = @"ResourcePatterns";
 static NSString * const kSettingsKeyMatchSimilarName = @"MatchSimilarName";
+static NSString * const kSettingsKeyTypes = @"Types";
+
 
 #pragma mark - ResourceSettings
 
@@ -38,6 +40,7 @@ static NSString * const kSettingsKeyMatchSimilarName = @"MatchSimilarName";
         _resourceSuffixs = [self getValueForKey:kSettingsKeyResourceSuffixs];
         _resourcePatterns = [self getValueForKey:kSettingsKeyResourcePatterns];
         _matchSimilarName = [self getValueForKey:kSettingsKeyMatchSimilarName];
+        _types = [self getValueForKey:kSettingsKeyTypes];
     }
     return self;
 }
@@ -90,6 +93,11 @@ static NSString * const kSettingsKeyMatchSimilarName = @"MatchSimilarName";
 - (void)setResourcePatterns:(NSArray *)resourcePatterns {
     _resourcePatterns = resourcePatterns;
     [self setValue:resourcePatterns forKey:kSettingsKeyResourcePatterns];
+}
+
+- (void)setTypes:(NSArray<NSString *> *)types{
+    _types = types;
+    [self setValue:types forKey:kSettingsKeyTypes];
 }
 
 - (void)setMatchSimilarName:(NSNumber *)matchSimilarName {

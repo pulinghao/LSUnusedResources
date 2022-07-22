@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSArray *excludeFolders; /**< <NSString *> */
 @property (strong, nonatomic) NSArray *resourceSuffixs; /**< <NSString *> */
 @property (strong, nonatomic) NSArray *resourcePatterns; /**< <NSDictionary *> */
+@property (strong, nonatomic) NSArray<NSString *> *types;            /**<NSString *>*/
 @property (strong, nonatomic) NSNumber *matchSimilarName;
 
 + (instancetype)sharedObject;

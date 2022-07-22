@@ -31,6 +31,9 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 // Settings
 @property (weak) IBOutlet NSTextField *resSuffixTextField;
 
+//区分业务
+@property (weak) IBOutlet NSTextField *typeTextField;
+
 @property (weak) IBOutlet NSTableView *patternTableView;
 
 @property (weak) IBOutlet NSButton *ignoreSimilarCheckbox;
@@ -84,7 +87,6 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResourceFileQueryDone:) name:kNotificationResourceFileQueryDone object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResourceStringQueryDone:) name:kNotificationResourceStringQueryDone object:nil];
     
-    self.searchTypes = [[NSMutableArray alloc] init];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -143,6 +145,9 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
         return ;
     }
 
+    // 预处理
+    [self preHandleData];
+    
     NSArray *excludeFolders = [ResourceSettings sharedObject].excludeFolders;
     
     [[ResourceFileSearcher sharedObject] startWithProjectPath:projectPath excludeFolders:excludeFolders resourceSuffixs:resourceSuffixs];
@@ -225,35 +230,6 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
     [self.patternTableView reloadData];
 }
 
-- (IBAction)onWalkSearchButtonClicked:(id)sender {
-    NSButton *btn = (NSButton *)sender;
-    NSArray *walkArray = @[@"foot",@"walk",@"bw",@"ar",@"vps",@"indoor",@"npc"];
-    if (btn.state) {
-        [self.searchTypes addObjectsFromArray:walkArray];
-    } else {
-        [self.searchTypes removeObjectsInArray:walkArray];
-    }
-
-    
-}
-- (IBAction)onCycleSearchButtonClicked:(id)sender {
-    NSButton *btn = (NSButton *)sender;
-    NSArray *walkArray = @[@"bike",@"cycle",@"bc",@"roadbook"];
-    if (btn.state) {
-        [self.searchTypes addObjectsFromArray:walkArray];
-    } else {
-        [self.searchTypes removeObjectsInArray:walkArray];
-    }
-}
-- (IBAction)onBusSearchButtonClicked:(id)sender {
-    NSButton *btn = (NSButton *)sender;
-    NSArray *busArray = @[@"bus",@"mcat",@"plane",@"coach",@"train"];
-    if (btn.state) {
-        [self.searchTypes addObjectsFromArray:busArray];
-    } else {
-        [self.searchTypes removeObjectsInArray:busArray];
-    }
-}
 
 - (void)onResultsTableViewSingleClicked {
     // Copy to pasteboard
@@ -384,6 +360,18 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
     }
 }
 
+- (void)controlTextDidEndEditing:(NSNotification *)notification{
+    NSTextField *textField = [notification object];
+    if (textField == self.typeTextField) {
+        NSString *types = [textField stringValue];
+        NSArray *typesArray = [types componentsSeparatedByString:kDefaultResourceSeparator];
+        NSMutableArray * mua = [self.searchTypes mutableCopy];
+        [mua addObjectsFromArray:typesArray];
+        self.searchTypes = [mua mutableCopy];
+        [ResourceSettings sharedObject].types = [self.searchTypes copy];
+    }
+}
+
 #pragma mark - Private
 
 - (void)showAlertWithStyle:(NSAlertStyle)style title:(NSString *)title subtitle:(NSString *)subtitle {
@@ -412,6 +400,7 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
     
     [_browseButton setEnabled:state];
     [_resSuffixTextField setEnabled:state];
+    [_typeTextField setEnabled:state];
     [_pathTextField setEnabled:state];
     [_excludeFolderTextField setEnabled:state];
     
@@ -515,6 +504,7 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
 
 - (void)setupSettings {
     self.unusedResults = [NSMutableArray array];
+    self.searchTypes = [[NSMutableArray alloc] init];
     
     [self.pathTextField setStringValue:[ResourceSettings sharedObject].projectPath ? : @""];
     NSString *exclude = @"";
@@ -538,6 +528,19 @@ static NSString * const kResultIdentifyFilePath    = @"FilePath";
     
     NSNumber *matchSimilar = [ResourceSettings sharedObject].matchSimilarName;
     [self.ignoreSimilarCheckbox setState:matchSimilar.boolValue ? NSOnState : NSOffState];
+    
+    NSArray *types = [ResourceSettings sharedObject].types;
+    if (types.count) {
+        [self.typeTextField setStringValue:[types componentsJoinedByString:kDefaultResourceSeparator]];
+    }
 }
 
+- (void)preHandleData{
+    NSString *types = [self.typeTextField stringValue];
+    NSArray *typesArray = [types componentsSeparatedByString:kDefaultResourceSeparator];
+    NSMutableArray * mua = [self.searchTypes mutableCopy];
+    [mua addObjectsFromArray:typesArray];
+    self.searchTypes = [mua mutableCopy];
+    [ResourceSettings sharedObject].types = [self.searchTypes copy];
+}
 @end
